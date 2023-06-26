@@ -17,5 +17,9 @@ public class BlockController : MonoBehaviour
     {
         // move block downward
         transform.Translate(new Vector2(0f,-ySpeed) * Time.deltaTime, Space.World);
+        if(transform.position.y < -6f)
+        {
+            Destroy(gameObject);
+        }
     }
 }
