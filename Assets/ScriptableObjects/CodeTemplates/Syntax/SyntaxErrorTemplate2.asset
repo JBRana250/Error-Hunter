@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9647fa2a66a61154e9fc84418f5a4077, type: 3}
   m_Name: SyntaxErrorTemplate2
   m_EditorClassIdentifier: 
-  NumOfLines: 1
   Error: 1
-  Line1: "print(\u201Dx\u201D"
-  Line2: 
-  Line3: 
+  BlockSize: {x: 0.71, y: 0.23}
+  Text: print("x"

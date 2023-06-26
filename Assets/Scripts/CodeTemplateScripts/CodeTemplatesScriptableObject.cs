@@ -7,10 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CodeTemplatesScriptableObject", order = 1)]
 public class CodeTemplatesScriptableObject : ScriptableObject
 {
-    public int NumOfLines;
     public bool Error;
-    
-    public string Line1;
-    public string Line2;
-    public string Line3;
+    public Vector2 BlockSize;
+    public string Text;
 }

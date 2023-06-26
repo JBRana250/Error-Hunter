@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9647fa2a66a61154e9fc84418f5a4077, type: 3}
   m_Name: SyntaxErrorTemplate3
   m_EditorClassIdentifier: 
-  NumOfLines: 2
   Error: 1
-  Line1: 'whil True:'
-  Line2: '    print("x")'
-  Line3: 
+  BlockSize: {x: 1, y: 0.46}
+  Text: whil True:<br>    print("x")

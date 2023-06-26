@@ -10,5 +10,6 @@ public class ReferenceManager : MonoBehaviour
     //--------------------
     // prefabs
     public GameObject[] blockPrefabs;
+    public GameObject[] textPrefabs;
 
 }
