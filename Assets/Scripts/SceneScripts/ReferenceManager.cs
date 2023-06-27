@@ -6,6 +6,7 @@ public class ReferenceManager : MonoBehaviour
 {
     // scriptable objects
     public ScriptableObject[] syntaxErrorTemplates;
+    public ScriptableObject[] normalCodeTemplates;
 
     //--------------------
     // prefabs

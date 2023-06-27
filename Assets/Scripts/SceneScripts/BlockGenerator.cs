@@ -46,7 +46,7 @@ public class BlockGenerator : MonoBehaviour
 
             // spawns block at the top of the screen, and sets variables for the block.
             blockReference = Instantiate(blockGO, spawnPos, Quaternion.identity);
-            blockReference.GetComponent<BlockController>().ySpeed = Random.Range(0.1f,2);
+            blockReference.GetComponent<BlockController>().ySpeed = Random.Range(1f,1.25f);
 
             // get a random code template for the block to use
             randCodeTemplate = CodeDatabase.GetRandomCodeTemplate();

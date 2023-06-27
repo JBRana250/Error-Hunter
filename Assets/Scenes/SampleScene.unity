@@ -238,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generatingBlocks: 1
   RefManager: {fileID: 2098592936}
+  blockMargin: {x: 0, y: 0}
 --- !u!4 &1367084889
 Transform:
   m_ObjectHideFlags: 0
@@ -284,7 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   refManager: {fileID: 2098592937}
   blockGenerator: {fileID: 1367084888}
-  NumOfTemplatesToBeAdded: 0
 --- !u!4 &1899829792
 Transform:
   m_ObjectHideFlags: 0
@@ -333,6 +333,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b65d526ef719ac54a99961d5da80d158, type: 2}
   - {fileID: 11400000, guid: bac13c2910c08544bafbd47738a7cd03, type: 2}
   - {fileID: 11400000, guid: efee0040de2b2d84ea1a434f5b6a9a03, type: 2}
+  - {fileID: 11400000, guid: 4879f190ea5b3d7468cbb846d62abbe9, type: 2}
+  normalCodeTemplates:
+  - {fileID: 11400000, guid: 88cf55aa5d7f65d408d7bea5925fbe12, type: 2}
+  - {fileID: 11400000, guid: c12b7aeead4d711438473a8d1f3afa71, type: 2}
+  - {fileID: 11400000, guid: bbe447b81ab96f94fadd6ffac12080b9, type: 2}
   blockPrefabs:
   - {fileID: 5526020009047461296, guid: 27449c3357c61794cb9c4b1bc2dbae43, type: 3}
   textPrefabs:
