@@ -18,9 +18,13 @@ public class BlockGenerator : MonoBehaviour
     private GameObject textGO;
     public GameObject RefManager;
     private GameObject blockReference;
+    private BlockController blockController;
     private GameObject textReference;
     private CodeTemplatesScriptableObject randCodeTemplate;
     public Vector2 blockMargin;
+
+    public float WaitTime;
+    private float TimeElapsed;
 
     public IEnumerator GenerateBlocks()
     {
@@ -44,12 +48,14 @@ public class BlockGenerator : MonoBehaviour
             xSpawn = Random.Range(xMin, xMax);
             spawnPos = new Vector2 (xSpawn, ySpawn);
 
-            // spawns block at the top of the screen, and sets variables for the block.
-            blockReference = Instantiate(blockGO, spawnPos, Quaternion.identity);
-            blockReference.GetComponent<BlockController>().ySpeed = Random.Range(1f,1.25f);
-
             // get a random code template for the block to use
             randCodeTemplate = CodeDatabase.GetRandomCodeTemplate();
+
+            // spawns block at the top of the screen, and sets variables for the block.
+            blockReference = Instantiate(blockGO, spawnPos, Quaternion.identity);
+            blockController = blockReference.GetComponent<BlockController>();
+            blockController.ySpeed = Random.Range(1f,1.25f);
+            blockController.CodeTemplate = randCodeTemplate;
 
             // set size of block according to code template information and blockMargin
             blockReference.transform.localScale = randCodeTemplate.BlockSize + blockMargin;
@@ -59,14 +65,22 @@ public class BlockGenerator : MonoBehaviour
             textReference.GetComponent<TextMeshPro>().text = randCodeTemplate.Text;
             textReference.GetComponent<RectTransform>().sizeDelta = randCodeTemplate.BlockSize;
             textReference.transform.SetParent(blockReference.transform);
+   
+            // waits a specified amount of seconds
+            yield return new WaitForSeconds(WaitTime);
 
-            // set codetemplate to the variable in textcontroller of block
-            blockReference.GetComponent<TextController>().CodeTemplate = randCodeTemplate;
+            // waittime decreased the more it goes on, slowly generating more and more blocks.
+            TimeElapsed += WaitTime;
+            WaitTime -= (TimeElapsed/1000);
 
-            
-            
-            // waits 0.5 seconds
-            yield return new WaitForSeconds(0.5f);
+            // randomises wait time
+            WaitTime += Random.Range(-0.1f,0.1f);
+
+            // clamps wait time to be greater or equal to 0.5s
+            if(WaitTime < 0.5f)
+            {
+                WaitTime = 0.5f;
+            }
         }
     }
 }

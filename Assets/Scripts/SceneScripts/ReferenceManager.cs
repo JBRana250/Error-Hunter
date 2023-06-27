@@ -13,4 +13,13 @@ public class ReferenceManager : MonoBehaviour
     public GameObject[] blockPrefabs;
     public GameObject[] textPrefabs;
 
+    //--------------------
+    // UI elements
+    public Canvas canvas;
+    public GameObject score;
+
+    //--------------------
+    // Scene objects
+    public Camera mCamera;
+
 }

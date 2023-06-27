@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9647fa2a66a61154e9fc84418f5a4077, type: 3}
   m_Name: SyntaxErrorTemplate4
   m_EditorClassIdentifier: 
-  Error: 0
+  Error: 1
   BlockSize: {x: 1, y: 0.69}
   Text: x = [a, b, c]<br>for y in x<br>     print(y)
