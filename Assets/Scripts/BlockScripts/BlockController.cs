@@ -65,7 +65,6 @@ public class BlockController : MonoBehaviour
         
         if(CodeTemplate.Error == true)
         {
-            // reads the text on score, turns it into int and adds 1 to it. Then, turns the result into a string and makes it the new score.
             Score.text = (int.Parse(Score.text) - 1).ToString();
         } 
         Destroy(gameObject);
