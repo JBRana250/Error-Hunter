@@ -26,9 +26,12 @@ public class BlockGenerator : MonoBehaviour
     public float WaitTime;
     private float TimeElapsed;
 
+    private int WaitInt;
+
     public IEnumerator GenerateBlocks()
     {
         generatingBlocks = true;
+        WaitInt = 0;
         
         // obtain reference to block game object
         blockGO = RefManager.GetComponent<ReferenceManager>().blockPrefabs[0];
@@ -68,18 +71,25 @@ public class BlockGenerator : MonoBehaviour
    
             // waits a specified amount of seconds
             yield return new WaitForSeconds(WaitTime);
+            WaitInt += 1;
 
-            // waittime decreased the more it goes on, slowly generating more and more blocks.
-            TimeElapsed += WaitTime;
-            WaitTime -= (TimeElapsed/1000);
-
-            // randomises wait time
-            WaitTime += Random.Range(-0.1f,0.1f);
-
-            // clamps wait time to be greater or equal to 0.5s
-            if(WaitTime < 0.5f)
+            // makes sure that WaitTime is only adjusted every time 10 blocks spawn. Hopefully this reduces the difficulty curve
+            if(WaitInt >= 10)
             {
-                WaitTime = 0.5f;
+                // waittime decreased the more it goes on, slowly generating more and more blocks.
+                TimeElapsed += WaitTime;
+                WaitTime -= (TimeElapsed/1000);
+
+                // randomises wait time
+                WaitTime += Random.Range(-0.1f,0.1f);
+
+                // clamps wait time to be greater or equal to 0.5s
+                if(WaitTime < 0.5f)
+                {
+                    WaitTime = 0.5f;
+                }
+                
+                WaitInt = 0;
             }
         }
     }
