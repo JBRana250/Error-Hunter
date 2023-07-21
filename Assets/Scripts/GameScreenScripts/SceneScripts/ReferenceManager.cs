@@ -17,9 +17,9 @@ public class ReferenceManager : MonoBehaviour
     // UI elements
     public Canvas canvas;
     public GameObject score;
+    public GameObject lives;
 
     //--------------------
     // Scene objects
     public Camera mCamera;
-
 }
