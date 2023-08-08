@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class BlockController : MonoBehaviour
 {
     public float ySpeed;
     public CodeTemplatesScriptableObject CodeTemplate;
-    private TextMeshProUGUI Score;
-    private TextMeshProUGUI Lives;
     private Camera cam;
 
     private float camLerp;
@@ -18,8 +15,16 @@ public class BlockController : MonoBehaviour
     private Vector4 BlueV4;
     private Vector4 RedV4;
 
-    private GameObject refManagerGO;
     private ReferenceManager refManager;
+    private ScoreManager scoreManager;
+
+    // obtain all references
+    void Start()
+    {
+        refManager = GameObject.FindWithTag("RefManager").GetComponent<ReferenceManager>();
+        cam = refManager.mCamera;
+        scoreManager = refManager.score.GetComponent<ScoreManager>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -37,53 +42,28 @@ public class BlockController : MonoBehaviour
         // vector4 of colors blue and red. might use later
         // BlueV4 = new Vector4(85f,255f,110f,255f); 
         // RedV4 = new Vector4(255f, 0f, 0f, 255f);
-        refManagerGO = GameObject.FindWithTag("RefManager");
-        refManager = refManagerGO.GetComponent<ReferenceManager>();
-        Score = refManager.score.GetComponent<TextMeshProUGUI>();
-        Lives = refManager.lives.GetComponent<TextMeshProUGUI>();
-        cam = refManager.mCamera;
+        
         
         if(CodeTemplate.Error == true)
         {
-            // reads the text on score, turns it into int and adds 1 to it. Then, turns the result into a string and makes it the new score.
-            Score.text = (int.Parse(Score.text) + 1).ToString();
+            scoreManager.IncreaseScore();
         } 
         if(CodeTemplate.Error == false)
         {
-            ReduceLives();
+            scoreManager.ReduceLives();
         } 
         Destroy(gameObject);
-        
     }
     public void BlockReachedBottom()
     {
-        refManagerGO = GameObject.FindWithTag("RefManager");
-        refManager = refManagerGO.GetComponent<ReferenceManager>();
-        Score = refManager.score.GetComponent<TextMeshProUGUI>();
-        Lives = refManager.lives.GetComponent<TextMeshProUGUI>();
-        cam = refManager.mCamera;
-        
         if(CodeTemplate.Error == true)
         {
-            ReduceLives();
+            scoreManager.ReduceLives();
         } 
         if(CodeTemplate.Error == false)
         {
-            Score.text = (int.Parse(Score.text) + 1).ToString();
+            scoreManager.IncreaseScore();
         }
-        Destroy(gameObject);
-        
-    }
-
-    void ReduceLives()
-    {
-        // reduces lives by 1.
-        Lives.text = (int.Parse(Lives.text) - 1).ToString();
-        if(Lives.text == "0")
-        {
-            //game over
-            CrossSceneManager.CrossSceneScore = Score.text;
-            SceneManager.LoadScene("ScoreScreen");
-        }
+        Destroy(gameObject);   
     }
 }
