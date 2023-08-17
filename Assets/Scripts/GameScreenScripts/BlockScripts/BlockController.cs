@@ -6,6 +6,7 @@ using TMPro;
 public class BlockController : MonoBehaviour
 {
     public float ySpeed;
+    public float otherySpeed;
     public CodeTemplatesScriptableObject CodeTemplate;
     private Camera cam;
 
@@ -65,5 +66,22 @@ public class BlockController : MonoBehaviour
             scoreManager.IncreaseScore();
         }
         Destroy(gameObject);   
+    }
+    // check if other block's speed is less, and if so, set this block's speed to the other block's speed.
+    // this should fix the overlap issue since if the blocks fall at the same speed at the exact moment they start to overlap, then they will stop overlapping.
+    public void TouchedOtherBlock(GameObject GO)
+    {
+        otherySpeed = GO.GetComponent<BlockController>().ySpeed;
+        if (otherySpeed < ySpeed)
+        {
+            // sets ySpeed to be equal to the other block's speed.
+            ySpeed = otherySpeed;
+        }
+    }
+    // if remains in continuous contact with another block, this moves this block upwards, counteracting the downwards movement previously resulting in the block remaining stationary until the block is no longer in contact with another block.
+    // This is for the cases where blocks spawn on top of each other.
+    public void TouchingOtherBlock()
+    {
+        transform.Translate(new Vector2(0f,ySpeed) * Time.deltaTime, Space.World);
     }
 }

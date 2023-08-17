@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RefManager
   - BottomBar
+  - Block
   layers:
   - Default
   - TransparentFX
