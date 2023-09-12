@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SyntaxErrorTemplate2
   m_EditorClassIdentifier: 
   Error: 1
-  BlockSize: {x: 0.71, y: 0.23}
-  Text: print("x"
+  Text:
+  - print("x"

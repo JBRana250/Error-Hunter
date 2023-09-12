@@ -8,6 +8,5 @@ using UnityEngine;
 public class CodeTemplatesScriptableObject : ScriptableObject
 {
     public bool Error;
-    public Vector2 BlockSize;
-    public string Text;
+    public List<string> Text;
 }

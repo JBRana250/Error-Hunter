@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: NormalCodeTemplate3
   m_EditorClassIdentifier: 
   Error: 0
-  BlockSize: {x: 1, y: 0.69}
-  Text: x = [a, b, c]<br>for y in x:<br>     print(y)
+  Text:
+  - 'while True:'
+  - '    print("x")'

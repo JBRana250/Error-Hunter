@@ -22,11 +22,20 @@ public class BlockGenerator : MonoBehaviour
     private GameObject textReference;
     private CodeTemplatesScriptableObject randCodeTemplate;
     public Vector2 blockMargin;
+    private Vector2 blockSize;
 
     public float WaitTime;
     private float TimeElapsed;
 
     private int WaitInt;
+    
+    private string text;
+    private Vector2 CharSize;
+    private float LineTotalX;
+    private float TotalX;
+    private float TotalY;
+
+    public float FontSize;
 
     public IEnumerator GenerateBlocks()
     {
@@ -60,14 +69,27 @@ public class BlockGenerator : MonoBehaviour
             blockController.ySpeed = Random.Range(0.25f,1.25f);
             blockController.CodeTemplate = randCodeTemplate;
 
-            // set size of block according to code template information and blockMargin
-            blockReference.transform.localScale = randCodeTemplate.BlockSize + blockMargin;
+            // calculate size of block according to characters in each line of text
+            blockSize = CalculateBlockSize(randCodeTemplate.Text);
 
-            // instantiate a text prefab, put the text in and parent the textGO to the block.
+            // set size of block according to code template information and blockMargin
+            blockReference.transform.localScale = blockSize + blockMargin;
+
+            // instantiate a text prefab, put the text in and parent the textGO to the block for each line of text.
+
+            foreach(string textline in randCodeTemplate.Text)
+            {
+                text += textline;
+                text += "\n";
+            }
+
             textReference = Instantiate(textGO, spawnPos, Quaternion.identity);
-            textReference.GetComponent<TextMeshPro>().text = randCodeTemplate.Text;
-            textReference.GetComponent<RectTransform>().sizeDelta = randCodeTemplate.BlockSize;
+            textReference.GetComponent<TextMeshPro>().text = text;
+            textReference.GetComponent<RectTransform>().sizeDelta = blockSize;
             textReference.transform.SetParent(blockReference.transform);
+
+            text = "";
+            
    
             // waits a specified amount of seconds
             yield return new WaitForSeconds(WaitTime);
@@ -81,16 +103,44 @@ public class BlockGenerator : MonoBehaviour
                 WaitTime -= (TimeElapsed/1000);
 
                 // randomises wait time
-                WaitTime += Random.Range(-0.1f,0.1f);
+                WaitTime += Random.Range(-0.1f,0.5f);
 
                 // clamps wait time to be greater or equal to 0.5s
                 if(WaitTime < 0.5f)
                 {
                     WaitTime = 0.5f;
                 }
-                
+
                 WaitInt = 0;
             }
         }
+    }
+
+    private Vector2 CalculateBlockSize(List<string> Text)
+    {
+        TotalX = 0;
+        TotalY = 0;
+        foreach (string Line in Text)
+        {
+            LineTotalX = 0;
+            foreach (char Character in Line)
+            {
+                try {
+                    CharSize = TextCharSize.Characters[Character.ToString()].charSize;
+                } catch {
+
+                }
+                
+                LineTotalX += CharSize.x;
+            }
+            if(LineTotalX > TotalX)
+            {
+                TotalX = LineTotalX;
+            }
+            TotalY += 0.12f;
+        }
+        TotalX = TotalX*FontSize;
+        TotalY = TotalY*FontSize;
+        return new Vector2 (TotalX,TotalY);
     }
 }

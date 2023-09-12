@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9647fa2a66a61154e9fc84418f5a4077, type: 3}
-  m_Name: NormalCodeTemplate1
+  m_Name: SyntaxErrorTemplate5
   m_EditorClassIdentifier: 
-  Error: 0
+  Error: 1
   Text:
-  - print("x")
+  - x = ["a", "b", "c"]
+  - for y in x
+  - '    print(y)'

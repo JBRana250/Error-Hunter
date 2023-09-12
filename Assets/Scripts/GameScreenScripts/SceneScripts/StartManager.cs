@@ -25,7 +25,15 @@ public class StartManager : MonoBehaviour
             CodeDatabase.currentCodeTemplates.Add(codeTemplate);
         }
         
+        // add in characters to TextCharSize dictionary to auto-size blocks
+        if(TextCharSize.Characters.Count == 0)
+        {
+            TextCharSize.AddCharacters();
+        }
+        
         // start generating blocks
-        StartCoroutine(blockGenerator.GenerateBlocks());        
+        StartCoroutine(blockGenerator.GenerateBlocks());
+
+
     }
 }

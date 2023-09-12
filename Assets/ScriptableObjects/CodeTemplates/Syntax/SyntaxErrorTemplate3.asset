@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: SyntaxErrorTemplate3
   m_EditorClassIdentifier: 
   Error: 1
-  BlockSize: {x: 1, y: 0.46}
-  Text: whil True:<br>    print("x")
+  Text:
+  - 'whil True:'
+  - '    print("x")'
