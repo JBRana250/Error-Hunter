@@ -1144,6 +1144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generatingBlocks: 1
+  xSpawnVariance: 8
   RefManager: {fileID: 847790821}
   blockMargin: {x: 0.2, y: 0.2}
   WaitTime: 2

@@ -8,8 +8,7 @@ using TMPro;
 public class BlockGenerator : MonoBehaviour
 {
     public bool generatingBlocks;
-    private float xMax;
-    private float xMin;
+    public float xSpawnVariance;
     private float xSpawn;
     private float ySpawn;
     private float ySpeed;
@@ -48,8 +47,6 @@ public class BlockGenerator : MonoBehaviour
         textGO = RefManager.GetComponent<ReferenceManager>().textPrefabs[0];
         
         ySpawn = 6f;
-        xMax = 9.25f;
-        xMin = -9.25f;
 
         // represents the extra space horizontally and vertically
         blockMargin = new Vector2(0.2f,0.2f);
@@ -57,7 +54,7 @@ public class BlockGenerator : MonoBehaviour
         while(generatingBlocks)
         {
             // create a random x value and spawn position of the block
-            xSpawn = Random.Range(xMin, xMax);
+            xSpawn = Random.Range(-xSpawnVariance, xSpawnVariance);
             spawnPos = new Vector2 (xSpawn, ySpawn);
 
             // get a random code template for the block to use
@@ -98,12 +95,8 @@ public class BlockGenerator : MonoBehaviour
             // makes sure that WaitTime is only adjusted every time 10 blocks spawn. Hopefully this reduces the difficulty curve
             if(WaitInt >= 10)
             {
-                // waittime decreased the more it goes on, slowly generating more and more blocks.
-                TimeElapsed += WaitTime;
-                WaitTime -= (TimeElapsed/1000);
-
-                // randomises wait time
-                WaitTime += Random.Range(-0.1f,0.5f);
+                // randomises + decreases wait time
+                WaitTime += Random.Range(0,0.15f);
 
                 // clamps wait time to be greater or equal to 0.5s
                 if(WaitTime < 0.5f)
