@@ -13,6 +13,7 @@ public class NavManager : MonoBehaviour
     {
         SceneManager.LoadScene(Scene);
     }
+
     public void QuitGame()
     {
         Application.Quit();
